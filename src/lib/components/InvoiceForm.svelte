@@ -17,14 +17,15 @@
 </script>
 
 <div class="border-b pb-6">
-  <h2 class="text-xl font-semibold mb-4">Invoice Information</h2>
   <div class="grid grid-cols-2 gap-4">
     <div>
       <label class="block text-sm font-medium text-gray-700">Invoice Number</label>
       <input
         type="text"
         bind:value={invoiceInfo.number}
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        placeholder="Enter invoice number"
+        class="block w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition duration-150"
       />
     </div>
     <div>
@@ -33,7 +34,8 @@
         type="date"
         bind:value={invoiceInfo.date}
         on:change={(e) => handleChange('date', e.currentTarget.value)}
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        class="block w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition duration-150"
       />
     </div>
     <div>
@@ -41,7 +43,8 @@
       <input
         type="date"
         bind:value={invoiceInfo.dueDate}
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        class="block w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition duration-150"
       />
     </div>
     <div>
@@ -51,7 +54,8 @@
         bind:value={invoiceInfo.hourlyRate}
         min="0"
         step="0.01"
-        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+        class="block w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-20 transition duration-150"
       />
     </div>
   </div>

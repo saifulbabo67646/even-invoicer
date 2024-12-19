@@ -11,7 +11,13 @@ export interface TimeEntry {
 export interface ClientInfo {
   name: string;
   company: string;
-  address: string;
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  phone: string;
   email: string;
 }
 

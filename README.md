@@ -4,7 +4,10 @@ A modern invoice generator built with SvelteKit and TypeScript. This application
 
 ## Demo
 
-![Demo Video](static/demo.webm)
+<video width="100%" controls>
+  <source src="static/demo.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
 
 ## Prerequisites
 

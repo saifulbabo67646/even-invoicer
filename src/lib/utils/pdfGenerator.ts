@@ -87,14 +87,14 @@ export async function generateInvoicePDF(
             stack: [
               {
                 columns: [
-                  { text: 'Invoice Number:', style: 'label', width: 'auto' },
+                  { text: 'Invoice Number:', style: 'label', width: 'auto', margin: [50, 0, 0, 0] },
                   { text: invoiceInfo.number, style: 'value', width: 100, alignment: 'left' }
                 ],
                 columnGap: 10
               },
               {
                 columns: [
-                  { text: 'Invoice Date:', style: 'label', width: 'auto' },
+                  { text: 'Invoice Date:', style: 'label', width: 'auto', margin: [50, 0, 0, 0] },
                   { 
                     text: new Date(invoiceInfo.date).toLocaleDateString('en-US', {
                       month: 'long',
@@ -110,7 +110,7 @@ export async function generateInvoicePDF(
               },
               {
                 columns: [
-                  { text: 'Payment Due:', style: 'label', width: 'auto' },
+                  { text: 'Payment Due:', style: 'label', width: 'auto', margin: [50, 0, 0, 0] },
                   { 
                     text: new Date(invoiceInfo.dueDate).toLocaleDateString('en-US', {
                       month: 'long',

@@ -78,7 +78,7 @@
     try {
       await generateInvoicePDF(timeEntries, clientInfo, invoiceInfo);
     } catch (err) {
-      error = err.message || 'Error generating PDF';
+      error = err instanceof Error ? err.message : 'Error generating PDF';
       console.error('Error generating PDF:', err);
     } finally {
       generating = false;

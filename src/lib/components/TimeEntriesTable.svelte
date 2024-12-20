@@ -29,7 +29,7 @@
       const updatedEntries = timeEntries.map((entry, index) => 
         index === editingIndex ? editingEntry : entry
       );
-      timeEntries = updatedEntries;
+      timeEntries = updatedEntries as TimeEntry[];
       editingIndex = null;
       editingEntry = null;
     }

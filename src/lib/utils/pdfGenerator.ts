@@ -65,23 +65,36 @@ export async function generateInvoicePDF(
               { text: 'BILL TO', style: 'sectionTitle' },
               { text: clientInfo.name, style: 'clientName' },
               { text: clientInfo.company, style: 'clientDetails' },
-              { text: clientInfo.address, style: 'clientDetails' },
-              { text: clientInfo.email, style: 'clientDetails', margin: [0, 10, 0, 0] }
-            ]
+              { text: clientInfo.address1, style: 'clientDetails' },
+              clientInfo.address2 ? { text: clientInfo.address2, style: 'clientDetails' } : null,
+              { 
+                text: [
+                  clientInfo.city || '',
+                  clientInfo.city && clientInfo.state ? ', ' : '',
+                  clientInfo.state || '',
+                  ' ',
+                  clientInfo.zip || ''
+                ].join(''),
+                style: 'clientDetails'
+              },
+              { text: clientInfo.country, style: 'clientDetails' },
+              clientInfo.phone ? { text: clientInfo.phone, style: 'clientDetails', margin: [0, 10, 0, 0] } : null,
+              clientInfo.email ? { text: clientInfo.email, style: 'clientDetails', margin: [0, 2, 0, 0] } : null
+            ].filter(Boolean)
           },
           {
             width: 'auto',
             stack: [
               {
                 columns: [
-                  { text: 'Invoice Number:', style: 'label', width: 'auto' },
+                  { text: 'Invoice Number:', style: 'label', width: 'auto', margin: [50, 0, 0, 0] },
                   { text: invoiceInfo.number, style: 'value', width: 100, alignment: 'left' }
                 ],
                 columnGap: 10
               },
               {
                 columns: [
-                  { text: 'Invoice Date:', style: 'label', width: 'auto' },
+                  { text: 'Invoice Date:', style: 'label', width: 'auto', margin: [50, 0, 0, 0] },
                   { 
                     text: new Date(invoiceInfo.date).toLocaleDateString('en-US', {
                       month: 'long',
@@ -97,12 +110,17 @@ export async function generateInvoicePDF(
               },
               {
                 columns: [
-                  { text: 'Payment Due:', style: 'label', width: 'auto' },
-                  { text: new Date(invoiceInfo.dueDate).toLocaleDateString('en-US', {
-                    month: 'long',
-                    day: 'numeric',
-                    year: 'numeric'
-                  }), style: 'value', width: 150, alignment: 'left' }
+                  { text: 'Payment Due:', style: 'label', width: 'auto', margin: [50, 0, 0, 0] },
+                  { 
+                    text: new Date(invoiceInfo.dueDate).toLocaleDateString('en-US', {
+                      month: 'long',
+                      day: 'numeric',
+                      year: 'numeric'
+                    }), 
+                    style: 'value', 
+                    width: 150, 
+                    alignment: 'left' 
+                  }
                 ],
                 columnGap: 10
               }
@@ -207,55 +225,58 @@ export async function generateInvoicePDF(
       sectionTitle: {
         fontSize: 12,
         color: '#6B7280',
-        margin: [0, 0, 0, 8]
+        margin: [0, 0, 0, 8],
+        bold: true,
+        letterSpacing: 1
       },
       clientName: {
-        fontSize: 14,
+        fontSize: 16,
         bold: true,
         margin: [0, 0, 0, 4]
       },
       clientDetails: {
-        fontSize: 12,
+        fontSize: 11,
         color: '#374151',
         lineHeight: 1.4
       },
       label: {
-        fontSize: 12,
+        fontSize: 11,
         color: '#6B7280'
       },
       value: {
-        fontSize: 12,
-        color: '#374151'
+        fontSize: 11,
+        color: '#111827'
       },
       tableHeader: {
-        fontSize: 12,
-        color: '#6B7280',
+        fontSize: 10,
         bold: true,
-        margin: [0, 0, 0, 8]
+        color: '#6B7280',
+        margin: [0, 0, 0, 8],
+        letterSpacing: 1
       },
       itemTitle: {
-        fontSize: 12,
+        fontSize: 11,
         bold: true,
-        color: '#374151',
-        margin: [0, 0, 0, 4]
+        color: '#111827',
+        margin: [0, 0, 0, 2]
       },
       itemDescription: {
-        fontSize: 12,
+        fontSize: 11,
         color: '#6B7280'
       },
       tableCell: {
-        fontSize: 12,
+        fontSize: 11,
         color: '#374151'
       },
       totalLabel: {
-        fontSize: 12,
-        color: '#374151',
-        bold: true
+        fontSize: 11,
+        bold: true,
+        color: '#374151'
       },
       totalValue: {
-        fontSize: 12,
-        color: '#374151',
-        bold: true
+        fontSize: 11,
+        bold: true,
+        color: '#111827'
       }
     },
     defaultStyle: {

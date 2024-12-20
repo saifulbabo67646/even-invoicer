@@ -10,66 +10,78 @@
   $: totalAmount = totalHours * invoiceInfo.hourlyRate;
 </script>
 
-<div class="border rounded-lg p-8 bg-white shadow-sm">
-  <div class="text-4xl font-bold text-center mb-8">INVOICE</div>
-
-  <div class="grid grid-cols-2 gap-8 mb-8">
-    <div>
-      <div class="text-gray-600 font-semibold mb-2">BILL TO</div>
-      <div>{clientInfo.name || 'Client Name'}</div>
-      <div>{clientInfo.company || 'Company Name'}</div>
-      <div>{clientInfo.address || 'Address'}</div>
-      <div>{clientInfo.email || 'Email'}</div>
-    </div>
+<div class="bg-white">
+  <!-- Header -->
+  <div class="bg-black text-white p-6 flex justify-between items-center">
+    <div class="text-3xl font-light">INVOICE</div>
     <div class="text-right">
-      <div class="mb-2">
-        <span class="font-semibold">Invoice Number: </span>
-        <span>{invoiceInfo.number || '-'}</span>
-      </div>
-      <div class="mb-2">
-        <span class="font-semibold">Date: </span>
-        <span>{invoiceInfo.date || '-'}</span>
-      </div>
-      <div class="mb-2">
-        <span class="font-semibold">Due Date: </span>
-        <span>{invoiceInfo.dueDate || '-'}</span>
-      </div>
-      <div>
-        <span class="font-semibold">Rate: </span>
-        <span>${invoiceInfo.hourlyRate}/hour</span>
-      </div>
+      <div class="text-sm">Amount Due (USD)</div>
+      <div class="text-2xl">{formatCurrency(totalAmount)}</div>
     </div>
   </div>
 
-  <table class="w-full mb-8">
-    <thead>
-      <tr class="bg-gray-50 text-left">
-        <th class="py-2 px-4 font-semibold">Date</th>
-        <th class="py-2 px-4 font-semibold">Client</th>
-        <th class="py-2 px-4 font-semibold">Project</th>
-        <th class="py-2 px-4 font-semibold">Task</th>
-        <th class="py-2 px-4 font-semibold text-right">Hours</th>
-        <th class="py-2 px-4 font-semibold text-right">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      {#each timeEntries as entry}
-        <tr class="border-b">
-          <td class="py-2 px-4">{entry.Date}</td>
-          <td class="py-2 px-4">{entry.Client}</td>
-          <td class="py-2 px-4">{entry.Project}</td>
-          <td class="py-2 px-4">{entry.Task}</td>
-          <td class="py-2 px-4 text-right">{entry.Hours}</td>
-          <td class="py-2 px-4 text-right">
-            {formatCurrency(parseFloat(entry.Hours) * invoiceInfo.hourlyRate)}
-          </td>
-        </tr>
-      {/each}
-      <tr class="font-semibold">
-        <td colspan="4" class="py-2 px-4"></td>
-        <td class="py-2 px-4 text-right">{totalHours.toFixed(2)}</td>
-        <td class="py-2 px-4 text-right">{formatCurrency(totalAmount)}</td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Content -->
+  <div class="p-8">
+    <!-- Client and Invoice Info -->
+    <div class="grid grid-cols-2 gap-8 mb-8">
+      <div>
+        <div class="text-gray-600 mb-1">BILL TO</div>
+        <div class="font-medium">{clientInfo.name || 'Client Name'}</div>
+        <div>{clientInfo.company || 'FirstName LastName'}</div>
+        <div>{clientInfo.address1 || 'Address Line 1'}</div>
+        <div>{clientInfo.address2 || 'Address Line 2'}</div>
+        <div>{clientInfo.city || 'City'}, {clientInfo.state || 'State'} {clientInfo.zip || 'ZipCode'}</div>
+        <div>{clientInfo.country || 'United States'}</div>
+        <div class="mt-2">{clientInfo.phone || '+1234567890'}</div>
+        <div>{clientInfo.email || 'client@email.com'}</div>
+      </div>
+      <div class="text-right">
+        <div class="mb-2">
+          <span class="text-gray-600">Invoice Number: </span>
+          <span>{invoiceInfo.number}</span>
+          </div>
+        <div class="mb-2">
+          <span class="text-gray-600">Invoice Date: </span>
+          <span>{invoiceInfo.date}</span>
+          </div>
+          <div>
+          <span class="text-gray-600">Payment Due: </span>
+          <span>{invoiceInfo.dueDate}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Time Entries Table -->
+    <div class="mb-8">
+      <div class="grid grid-cols-4 text-gray-600 mb-2">
+        <div>ITEMS</div>
+        <div class="text-right">HOURS</div>
+        <div class="text-right">RATE</div>
+        <div class="text-right">AMOUNT</div>
+      </div>
+          {#each timeEntries as entry}
+        <div class="grid grid-cols-4 py-2 border-t border-gray-200">
+          <div>
+                <div class="font-medium">{entry.Project}</div>
+            <div class="text-gray-600">{entry.Task}</div>
+          </div>
+          <div class="text-right">{entry.Hours}</div>
+          <div class="text-right">{formatCurrency(invoiceInfo.hourlyRate)}</div>
+          <div class="text-right">{formatCurrency(parseFloat(entry.Hours) * invoiceInfo.hourlyRate)}</div>
+        </div>
+          {/each}
+    </div>
+
+    <!-- Totals -->
+    <div class="border-t border-gray-200 pt-4">
+      <div class="flex justify-between mb-2">
+        <div class="text-gray-600">Total:</div>
+        <div>{formatCurrency(totalAmount)}</div>
+      </div>
+      <div class="flex justify-between font-medium">
+        <div>Amount Due (USD):</div>
+        <div>{formatCurrency(totalAmount)}</div>
+      </div>
+    </div>
+  </div>
 </div>

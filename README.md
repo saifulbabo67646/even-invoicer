@@ -2,6 +2,10 @@
 
 A modern invoice generator built with SvelteKit and TypeScript. This application allows you to create and manage professional invoices with ease.
 
+## Demo
+
+![Demo Video](static/demo.webm)
+
 ## Prerequisites
 
 - [Bun](https://bun.sh) installed on your machine

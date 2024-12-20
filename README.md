@@ -1,38 +1,70 @@
-# sv
+# Invoice Generator
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A modern invoice generator built with SvelteKit and TypeScript. This application allows you to create and manage professional invoices with ease.
 
-## Creating a project
+## Prerequisites
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [Bun](https://bun.sh) installed on your machine
+- Node.js (v18 or higher recommended)
 
+## Getting Started
+
+1. Clone the repository:
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+git clone https://github.com/saifulbabo67646/even-invoicer.git
+cd even-invoicer
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
+2. Install dependencies:
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+bun install
 ```
 
-## Building
-
-To create a production version of your app:
-
+3. Start the development server:
 ```bash
-npm run build
+bun dev
 ```
 
-You can preview the production build with `npm run preview`.
+The application will be available at `http://localhost:5173`
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+## Building for Production
+
+1. Create a production build:
+```bash
+bun run build
+```
+
+2. Preview the production build:
+```bash
+bun run preview
+```
+
+## Development
+
+To check for TypeScript errors:
+```bash
+bun run check
+```
+
+For continuous type checking during development:
+```bash
+bun run check:watch
+```
+
+## Project Structure
+
+- `/src` - Source code
+  - `/routes` - SvelteKit routes
+  - `/lib` - Reusable components and utilities
+    - `/components` - Svelte components
+    - `/utils` - Utility functions
+
+## Technologies Used
+
+- SvelteKit - Web application framework
+- TypeScript - Type safety
+- TailwindCSS - Styling
+- PDFMake - PDF generation
+- PapaParse - CSV parsing
+
+> Note: This project uses [Bun](https://bun.sh) as the JavaScript runtime and package manager. Make sure you have it installed on your system.
